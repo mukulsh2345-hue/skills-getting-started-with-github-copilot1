@@ -25,10 +25,30 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          <div class="participants-section">
+            <p><strong>Participants:</strong></p>
+            <ul class="participants-list"></ul>
+          </div>
         `;
 
+        // Populate participants list
+        const participantsList = activityCard.querySelector(".participants-list");
+        if (details.participants && details.participants.length > 0) {
+          details.participants.forEach((participant) => {
+            const li = document.createElement("li");
+            li.className = "participant-item";
+            li.textContent = participant;
+            participantsList.appendChild(li);
+          });
+        } else {
+          const li = document.createElement("li");
+          li.className = "no-participants";
+          li.textContent = "No participants yet";
+          participantsList.appendChild(li);
+        }
+        
         activitiesList.appendChild(activityCard);
-
+        
         // Add option to select dropdown
         const option = document.createElement("option");
         option.value = name;
